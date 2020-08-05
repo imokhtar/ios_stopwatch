@@ -101,10 +101,7 @@ class AnalogClock extends StatelessWidget {
                         children: <Widget>[
                           Transform.rotate(
                             angle:
-                                viewmodel.lapTime().inMilliseconds.toDouble() /
-                                    1000 /
-                                    60 *
-                                    (2 * pi),
+                                viewmodel.lapTime().inMilliseconds.toDouble() / 1000 / 60 * (2 * pi),
                             child: CustomPaint(
                               painter: ClockPointer(
                                   color: Colors.blueAccent,
@@ -114,13 +111,7 @@ class AnalogClock extends StatelessWidget {
                             ),
                           ),
                           Transform.rotate(
-                            angle: viewmodel
-                                    .elapsedTime()
-                                    .inMilliseconds
-                                    .toDouble() /
-                                1000 /
-                                60 *
-                                (2 * pi),
+                            angle: viewmodel.elapsedTime().inMilliseconds.toDouble() / 1000 / 60 * (2 * pi),
                             child: CustomPaint(
                               painter: ClockPointer(
                                   isWithTail: true, isFilledCenter: false),
