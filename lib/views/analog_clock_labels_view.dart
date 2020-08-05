@@ -13,7 +13,7 @@ class ClockLabels extends StatelessWidget {
       children: <Widget>[
         for (var i in indices)
           Transform.rotate(
-            angle: (((i/labels.length) * 2 * pi) - pi),
+            angle: (((i / labels.length) * 2 * pi) - pi),
             child: Column(
               children: <Widget>[
                 Expanded(
@@ -21,8 +21,11 @@ class ClockLabels extends StatelessWidget {
                   child: Container(),
                 ),
                 Transform.rotate(
-                  angle: -(((i/labels.length) * 2 * pi) - pi),
-                  child: Text('${labels[i]}',style: textStyle,),
+                  angle: -(((i / labels.length) * 2 * pi) - pi),
+                  child: Text(
+                    '${labels[i]}',
+                    style: textStyle,
+                  ),
                 )
               ],
             ),

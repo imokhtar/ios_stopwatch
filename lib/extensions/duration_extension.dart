@@ -1,4 +1,3 @@
-
 extension ClokcDuratiion on Duration {
   String digitalClockString() {
     var str = this.toString().replaceRange(10, 14, '');

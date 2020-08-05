@@ -3,13 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:ios_stopwatch/models/StopwatchEntity.dart';
 
 class StopWatchViewModel extends ChangeNotifier {
-
   Timer timer;
-  StopwatchEntity stopwatchEntity = StopwatchEntity(startTime: Duration(seconds: 0), currentTime: Duration(seconds: 0));
+  StopwatchEntity stopwatchEntity = StopwatchEntity(
+      startTime: Duration(seconds: 0), currentTime: Duration(seconds: 0));
   bool isRunning = false;
 
   List<Duration> laps() {
-    if (lapTime().inMilliseconds == 0)  {
+    if (lapTime().inMilliseconds == 0) {
       return stopwatchEntity.laps.reversed.toList();
     } else {
       return (stopwatchEntity.laps + [lapTime()]).reversed.toList();
@@ -20,7 +20,8 @@ class StopWatchViewModel extends ChangeNotifier {
     if (stopwatchEntity.previousElapsedTime == null) {
       return stopwatchEntity.currentTime - stopwatchEntity.startTime;
     } else {
-      return (stopwatchEntity.currentTime - stopwatchEntity.startTime) + stopwatchEntity.previousElapsedTime;
+      return (stopwatchEntity.currentTime - stopwatchEntity.startTime) +
+          stopwatchEntity.previousElapsedTime;
     }
   }
 
@@ -34,7 +35,7 @@ class StopWatchViewModel extends ChangeNotifier {
     stopwatchEntity.startTime = startTime;
     stopwatchEntity.currentTime = startTime;
     stopwatchEntity.lastLapDuration = Duration(seconds: 0);
-    timer = Timer.periodic(Duration(milliseconds: 16), (timer) {
+    timer = Timer.periodic(Duration(milliseconds: 30), (timer) {
       int currentTimeInMilliSecs = DateTime.now().millisecondsSinceEpoch;
       Duration currentTime = Duration(milliseconds: currentTimeInMilliSecs);
       stopwatchEntity.currentTime = currentTime;
@@ -55,7 +56,8 @@ class StopWatchViewModel extends ChangeNotifier {
   }
 
   void reset() {
-    stopwatchEntity = StopwatchEntity(startTime: Duration(seconds: 0), currentTime: Duration(seconds: 0));
+    stopwatchEntity = StopwatchEntity(
+        startTime: Duration(seconds: 0), currentTime: Duration(seconds: 0));
     notifyListeners();
   }
 
@@ -64,7 +66,4 @@ class StopWatchViewModel extends ChangeNotifier {
     stopwatchEntity.lastLapDuration = elapsedTime();
     notifyListeners();
   }
-
 }
-
-

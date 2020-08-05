@@ -5,14 +5,16 @@ class ClockPointer extends CustomPainter {
   bool isFilledCenter;
   Color color;
 
-  ClockPointer({this.color = Colors.orange, this.isWithTail, this.isFilledCenter}): super();
+  ClockPointer(
+      {this.color = Colors.orange, this.isWithTail, this.isFilledCenter})
+      : super();
 
   @override
   void paint(Canvas canvas, Size size) {
     // TODO: implement paint
     final p1 = size.center(Offset(0, 4));
-    final p2 = size.center(Offset(0, size.height/15));
-    final p3 = size.center(Offset(0,-4));
+    final p2 = size.center(Offset(0, size.height / 15));
+    final p3 = size.center(Offset(0, -4));
     final strokePaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
@@ -40,5 +42,4 @@ class ClockPointer extends CustomPainter {
     // TODO: implement shouldRepaint
     return false;
   }
-
 }
