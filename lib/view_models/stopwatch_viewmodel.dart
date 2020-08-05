@@ -9,7 +9,23 @@ class StopWatchViewModel extends ChangeNotifier {
   bool isRunning = false;
 
   List<Duration> laps() {
-    return stopwatchEntity.laps.reversed.toList();
+    if (lapTime().inMilliseconds == 0)  {
+      return stopwatchEntity.laps.reversed.toList();
+    } else {
+      return (stopwatchEntity.laps + [lapTime()]).reversed.toList();
+    }
+  }
+
+  Duration elapsedTime() {
+    if (stopwatchEntity.previousElapsedTime == null) {
+      return stopwatchEntity.currentTime - stopwatchEntity.startTime;
+    } else {
+      return (stopwatchEntity.currentTime - stopwatchEntity.startTime) + stopwatchEntity.previousElapsedTime;
+    }
+  }
+
+  Duration lapTime() {
+    return elapsedTime() - stopwatchEntity.lastLapDuration;
   }
 
   void start() {
@@ -31,7 +47,7 @@ class StopWatchViewModel extends ChangeNotifier {
   void pause() {
     timer.cancel();
     timer = null;
-    stopwatchEntity.previousElapsedTime = stopwatchEntity.elapsedTime();
+    stopwatchEntity.previousElapsedTime = elapsedTime();
     stopwatchEntity.startTime = Duration(seconds: 0);
     stopwatchEntity.currentTime = Duration(seconds: 0);
     isRunning = false;
@@ -39,15 +55,13 @@ class StopWatchViewModel extends ChangeNotifier {
   }
 
   void reset() {
-    stopwatchEntity.previousElapsedTime = Duration(seconds: 0);
-    stopwatchEntity.startTime = Duration(seconds: 0);
-    stopwatchEntity.currentTime = Duration(seconds: 0);
-    stopwatchEntity.laps = [];
+    stopwatchEntity = StopwatchEntity(startTime: Duration(seconds: 0), currentTime: Duration(seconds: 0));
     notifyListeners();
   }
 
   void lap() {
-    stopwatchEntity.lap();
+    stopwatchEntity.laps.add(lapTime());
+    stopwatchEntity.lastLapDuration = elapsedTime();
     notifyListeners();
   }
 

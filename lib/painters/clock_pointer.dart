@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ClockPointer extends CustomPainter {
   bool isWithTail;
   bool isFilledCenter;
+  Color color;
 
-  ClockPointer({this.isWithTail, this.isFilledCenter}): super();
+  ClockPointer({this.color = Colors.orange, this.isWithTail, this.isFilledCenter}): super();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -15,11 +16,11 @@ class ClockPointer extends CustomPainter {
     final strokePaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
-      ..color = Colors.orange;
+      ..color = color;
 
     final fillPaint = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.orange;
+      ..color = color;
 
     if (isWithTail) {
       canvas.drawLine(p1, p2, strokePaint);

@@ -108,6 +108,7 @@ class StopwatchPage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 16.0),
                     child: ListView.separated(
                         scrollDirection: Axis.vertical,
+                        physics: AlwaysScrollableScrollPhysics(),
                         shrinkWrap: false,
                         separatorBuilder: (BuildContext context, int index) => Divider(),
                         itemCount: viewmodel.laps().length,

@@ -44,7 +44,7 @@ class AnalogClock extends StatelessWidget {
                             ClockTicks(ticksPerUnit: 2, tickWidth: 1.5, tickHeight: 10, maxCycle: 30,),
                             Consumer<StopWatchViewModel>(builder: (context, viewmodel, child) {
                               return Transform.rotate(
-                                angle: viewmodel.stopwatchEntity.elapsedTime().inMilliseconds.toDouble() / 1000 / 60 / 30 * (2 * pi),
+                                angle: viewmodel.elapsedTime().inMilliseconds.toDouble() / 1000 / 60 / 30 * (2 * pi),
                                 child: CustomPaint(
                                   painter: ClockPointer(isWithTail: false, isFilledCenter: true),
                                   child: Container(),
@@ -61,7 +61,7 @@ class AnalogClock extends StatelessWidget {
                       child: Consumer<StopWatchViewModel>(
                         builder: (context, viewmodel, child) {
                           return Text(
-                            ClokcDuratiion(viewmodel.stopwatchEntity.elapsedTime()).digitalClockString(),
+                            ClokcDuratiion(viewmodel.elapsedTime()).digitalClockString(),
                             style: TextStyle(
                                 fontSize: 24,
                                 fontFeatures: [FontFeature.tabularFigures()]
@@ -71,12 +71,23 @@ class AnalogClock extends StatelessWidget {
                       )
                   ),
                   Consumer<StopWatchViewModel>(builder: (context, viewmodel, child) {
-                    return Transform.rotate(
-                      angle: viewmodel.stopwatchEntity.elapsedTime().inMilliseconds.toDouble() / 1000 / 60 * (2 * pi),
-                      child: CustomPaint(
-                        painter: ClockPointer(isWithTail: true, isFilledCenter: false),
-                        child: Container(),
-                      ),
+                    return Stack(
+                      children: <Widget>[
+                        Transform.rotate(
+                          angle: viewmodel.lapTime().inMilliseconds.toDouble() / 1000 / 60 * (2 * pi),
+                          child: CustomPaint(
+                            painter: ClockPointer(color: Colors.blueAccent, isWithTail: true, isFilledCenter: false),
+                            child: Container(),
+                          ),
+                        ),
+                        Transform.rotate(
+                          angle: viewmodel.elapsedTime().inMilliseconds.toDouble() / 1000 / 60 * (2 * pi),
+                          child: CustomPaint(
+                            painter: ClockPointer(isWithTail: true, isFilledCenter: false),
+                            child: Container(),
+                          ),
+                        ),
+                      ],
                     );
                   },
                   )
