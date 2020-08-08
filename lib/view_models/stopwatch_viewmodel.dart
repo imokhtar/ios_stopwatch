@@ -17,12 +17,8 @@ class StopWatchViewModel extends ChangeNotifier {
   }
 
   Duration elapsedTime() {
-    if (stopwatchEntity.previousElapsedTime == null) {
-      return stopwatchEntity.currentTime - stopwatchEntity.startTime;
-    } else {
       return (stopwatchEntity.currentTime - stopwatchEntity.startTime) +
           stopwatchEntity.previousElapsedTime;
-    }
   }
 
   Duration lapTime() {
@@ -34,7 +30,6 @@ class StopWatchViewModel extends ChangeNotifier {
     Duration startTime = Duration(milliseconds: startTimeInMilliSecs);
     stopwatchEntity.startTime = startTime;
     stopwatchEntity.currentTime = startTime;
-    stopwatchEntity.lastLapDuration = Duration(seconds: 0);
     timer = Timer.periodic(Duration(milliseconds: 30), (timer) {
       int currentTimeInMilliSecs = DateTime.now().millisecondsSinceEpoch;
       Duration currentTime = Duration(milliseconds: currentTimeInMilliSecs);

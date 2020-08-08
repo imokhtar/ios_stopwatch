@@ -1,7 +1,7 @@
 class StopwatchEntity {
   Duration startTime;
   Duration currentTime;
-  Duration previousElapsedTime;
+  Duration previousElapsedTime = Duration(seconds: 0);
   Duration lastLapDuration = Duration(seconds: 0);
   List<Duration> laps = [];
   StopwatchEntity({

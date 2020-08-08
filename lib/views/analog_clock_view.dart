@@ -64,11 +64,7 @@ class AnalogClock extends StatelessWidget {
                                   angle: viewmodel
                                           .elapsedTime()
                                           .inMilliseconds
-                                          .toDouble() /
-                                      1000 /
-                                      60 /
-                                      30 *
-                                      (2 * pi),
+                                          .toDouble() / 1000 / 60 / 30 * (2 * pi),
                                   child: CustomPaint(
                                     painter: ClockPointer(
                                         isWithTail: false,
